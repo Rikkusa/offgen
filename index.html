@@ -108,7 +108,6 @@
                 const nom = document.getElementById('nom').value.trim();
                 const email = document.getElementById('email').value.trim();
                 const telephone = document.getElementById('telephone').value.trim();
-                const cvFile = document.getElementById('cv-file').files[0];
                 const objectifs = document.getElementById('objectifs').value.trim();
                 const methodologie = document.getElementById('methodologie').value.trim();
                 const exemplesTravail = document.getElementById('exemples-travail').value.trim();
@@ -118,7 +117,7 @@
                 const tarification = document.getElementById('tarification').value.trim();
                 const marketing = document.getElementById('marketing').value.trim();
 
-                if (!nom || !email || !telephone || !cvFile || !objectifs || !methodologie || !valeurUnique || !propositions || !tarification || !marketing) {
+                if (!nom || !email || !telephone || !objectifs || !methodologie || !valeurUnique || !propositions || !tarification || !marketing) {
                     alert("Veuillez remplir tous les champs obligatoires.");
                     return;
                 }
@@ -128,7 +127,6 @@
                 formData.append('nom', nom);
                 formData.append('email', email);
                 formData.append('telephone', telephone);
-                formData.append('cv-file', cvFile);
                 formData.append('objectifs', objectifs);
                 formData.append('methodologie', methodologie);
                 formData.append('exemples-travail', exemplesTravail);
@@ -161,8 +159,8 @@
                     document.getElementById("screen-3").classList.remove("hidden");
                 })
                 .catch(error => {
-                    console.error("Erreur lors de l'appel à l'API d'IA:", error);
-                    alert("Une erreur s'est produite lors de l'analyse de votre CV. Veuillez réessayer plus tard.");
+                    console.error("Erreur lors de l'appel", error);
+                    alert("Une erreur s'est produite lors de l'analyse. Veuillez réessayer plus tard.");
                 });
             });
 
@@ -243,7 +241,6 @@
                 document.getElementById('nom').value = "";
                 document.getElementById('email').value = "";
                 document.getElementById('telephone').value = "";
-                document.getElementById('cv-file').value = "";
                 document.getElementById('objectifs').value = "";
                 document.getElementById('methodologie').value = "";
                 document.getElementById('exemples-travail').value = "";
