@@ -1,0 +1,8 @@
+// Messages personnalisés pour les blocages
+const blockageMessages = {
+    "je ne sais pas par où commencer": "Je comprends cette sensation de ne pas savoir par où commencer - c'est normal quand on a tant de possibilités ! La bonne nouvelle, c'est que \"La Méthode Offre Parfaite\" te guide pas à pas, en commençant exactement là où tu es maintenant.",
+    "je ne me sens pas légitime": "Le syndrome de l'imposteur touche même les experts les plus qualifiés. \"La Méthode Offre Parfaite\" t'aide justement à identifier et valoriser ton expertise unique, celle qui fait que TES clients ont besoin de TOI spécifiquement.",
+    "j'ai peur de fixer un prix trop élevé": "La question du prix est souvent la plus délicate ! \"La Méthode Offre Parfaite\" inclut une formule concrète pour déterminer ton prix idéal - celui qui reflète ta vraie valeur tout en restant accessible pour tes clients idéaux.",
+    "je ne sais pas comment me démarquer": "Se démarquer dans un marché saturé peut sembler impossible, mais tu as une combinaison unique d'expériences et de perspectives. \"La Méthode Offre Parfaite\" t'aide à identifier et communiquer ce qui te rend véritablement unique.",
+    "je ne sais pas comment trouver mes clients idéaux": "Trouver tes clients idéaux commence par définir précisément qui ils sont. \"La Méthode Offre Parfaite\" inclut un processus étape par étape pour identifier, comprendre et attirer exactement les personnes qui ont besoin de ton offre."
+};

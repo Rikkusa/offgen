@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'Offres Personnalisées</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Écran 1: Accueil et Introduction -->
+        <div id="screen-1" class="screen">
+            <div class="logo">Générateur d'Offres Idéales</div>
+            <p class="intro-text">Bienvenue dans le générateur d'offres personnalisées !</p>
+            <p class="intro-highlight">Charge ton CV et réponds à quelques questions pour découvrir des offres qui correspondent parfaitement à ton expertise.</p>
+            <button id="start-btn" class="btn primary-btn">Commencer</button>
+        </div>
+
+        <!-- Écran 2: Upload de CV et Questions Supplémentaires -->
+        <div id="screen-2" class="screen hidden">
+            <h2>Informations Personnelles</h2>
+            <label for="nom">Nom:</label>
+            <input type="text" id="nom" name="nom" required>
+            <label for="email">Adresse e-mail:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="telephone">Numéro de téléphone:</label>
+            <input type="tel" id="telephone" name="telephone" required>
+            <div class="section">
+                <h2>Upload de CV</h2>
+                <label for="cv-file">Téléchargez votre CV:</label>
+                <input type="file" id="cv-file" name="cv-file" required>
+            </div>
+            <div class="section">
+                <h2>Questions Supplémentaires</h2>
+                <label for="objectifs">Quels sont tes objectifs professionnels à court et à long terme ?</label>
+                <textarea id="objectifs" name="objectifs" required></textarea>
+                <label for="methodologie">Quelle est ta méthodologie pour résoudre les problèmes de tes clients ?</label>
+                <textarea id="methodologie" name="methodologie" required></textarea>
+                <label for="exemples-travail">Puis-je voir des exemples de travaux précédents ?</label>
+                <textarea id="exemples-travail" name="exemples-travail"></textarea>
+                <label for="hobbies">Quels sont tes hobbies et activités complémentaires ?</label>
+                <textarea id="hobbies" name="hobbies"></textarea>
+                <label for="valeur-unique">Quelle est ta valeur unique par rapport à d'autres professionnels de ton domaine ?</label>
+                <textarea id="valeur-unique" name="valeur-unique" required></textarea>
+                <label for="propositions">Quels types de services ou de produits envisages-tu proposer ?</label>
+                <textarea id="propositions" name="propositions" required></textarea>
+                <label for="tarification">Comment envisages-tu de tarifier tes services ?</label>
+                <textarea id="tarification" name="tarification" required></textarea>
+                <label for="marketing">Comment comptes-tu promouvoir tes offres ?</label>
+                <textarea id="marketing" name="marketing" required></textarea>
+            </div>
+            <button id="continue-btn" class="btn primary-btn">Continuer</button>
+        </div>
+
+        <!-- Écran 3: Résultats Personnalisés -->
+        <div id="screen-3" class="screen hidden">
+            <h2>Vos offres personnalisées</h2>
+            <div class="qualification-message" id="qualification-message"></div>
+            <div class="offers-container" id="offers-container">
+                <div class="offer-card">
+                    <h3 id="offer-title-1"></h3>
+                    <p class="offer-description" id="offer-description-1"></p>
+                </div>
+                <div class="offer-card">
+                    <h3 id="offer-title-2"></h3>
+                    <p class="offer-description" id="offer-description-2"></p>
+                </div>
+                <div class="offer-card">
+                    <h3 id="offer-title-3"></h3>
+                    <p class="offer-description" id="offer-description-3"></p>
+                </div>
+            </div>
+            <button id="inspired-btn" class="btn primary-btn">C'est inspirant !</button>
+        </div>
+
+        <!-- Écran 4: Appel à l'Action et Qualification -->
+        <div id="screen-4" class="screen hidden">
+            <h2>Un dernier effort</h2>
+            <p class="intro-text">Qu'est-ce qui te bloque pour créer ton offre ?</p>
+            <div class="form-group">
+                <label for="blocage">Partage ce qui te bloque</label>
+                <textarea id="blocage" rows="4" placeholder="Par exemple: 'Je ne sais pas par où commencer'"></textarea>
+                <p class="suggestions">Suggestions: "Je ne sais pas par où commencer", "Je ne me sens pas légitime", "J'ai peur de fixer un prix trop élevé", "Je ne sais pas comment me démarquer"</p>
+            </div>
+            <button id="send-btn" class="btn primary-btn">Envoyer</button>
+        </div>
+
+        <!-- Écran 5: Confirmation et Prochaines Étapes -->
+        <div id="screen-5" class="screen hidden">
+            <h2>Merci !</h2>
+            <p class="confirmation-highlight">Nous avons reçu tes réponses.</p>
+            <div class="personalized-message" id="personalized-message"></div>
+            <button id="restart-btn" class="btn secondary-btn">Recommencer</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        // Initialisation des variables
+        let userDomain = "";
+        let userBlockage = "";
+
+        // Gestion des événements
+        document.addEventListener("DOMContentLoaded", function() {
+            // Écran 1: Accueil et Introduction
+            document.getElementById("start-btn").addEventListener("click", function() {
+                document.getElementById("screen-1").classList.add("hidden");
+                document.getElementById("screen-2").classList.remove("hidden");
+            });
+
+            // Écran 2: Upload de CV et Questions Supplémentaires
+            document.getElementById("continue-btn").addEventListener("click", function() {
+                const nom = document.getElementById('nom').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const telephone = document.getElementById('telephone').value.trim();
+                const cvFile = document.getElementById('cv-file').files[0];
+                const objectifs = document.getElementById('objectifs').value.trim();
+                const methodologie = document.getElementById('methodologie').value.trim();
+                const exemplesTravail = document.getElementById('exemples-travail').value.trim();
+                const hobbies = document.getElementById('hobbies').value.trim();
+                const valeurUnique = document.getElementById('valeur-unique').value.trim();
+                const propositions = document.getElementById('propositions').value.trim();
+                const tarification = document.getElementById('tarification').value.trim();
+                const marketing = document.getElementById('marketing').value.trim();
+
+                if (!nom || !email || !telephone || !cvFile || !objectifs || !methodologie || !valeurUnique || !propositions || !tarification || !marketing) {
+                    alert("Veuillez remplir tous les champs obligatoires.");
+                    return;
+                }
+
+                // Appel à l'API d'IA pour analyser le CV et déterminer le domaine d'expertise
+                const formData = new FormData();
+                formData.append('nom', nom);
+                formData.append('email', email);
+                formData.append('telephone', telephone);
+                formData.append('cv-file', cvFile);
+                formData.append('objectifs', objectifs);
+                formData.append('methodologie', methodologie);
+                formData.append('exemples-travail', exemplesTravail);
+                formData.append('hobbies', hobbies);
+                formData.append('valeur-unique', valeurUnique);
+                formData.append('propositions', propositions);
+                formData.append('tarification', tarification);
+                formData.append('marketing', marketing);
+
+                // Appel à l'API d'IA
+                fetch('https://api.qwen.aliyun.com/v1/generate-offers',  {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer YOUR_API_KEY'
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Mettre à jour le message de qualification
+                    document.getElementById("qualification-message").textContent = data.qualification;
+                    // Mettre à jour les offres
+                    const offerCards = document.querySelectorAll(".offer-card");
+                    for (let i = 0; i < offerCards.length; i++) {
+                        offerCards[i].querySelector("h3").textContent = data.offers[i].title;
+                        offerCards[i].querySelector(".offer-description").textContent = data.offers[i].description;
+                    }
+                    // Passer à l'écran suivant
+                    document.getElementById("screen-2").classList.add("hidden");
+                    document.getElementById("screen-3").classList.remove("hidden");
+                })
+                .catch(error => {
+                    console.error("Erreur lors de l'appel à l'API d'IA:", error);
+                    alert("Une erreur s'est produite lors de l'analyse de votre CV. Veuillez réessayer plus tard.");
+                });
+            });
+
+            // Écran 3: Résultats Personnalisés
+            document.getElementById("inspired-btn").addEventListener("click", function() {
+                document.getElementById("screen-3").classList.add("hidden");
+                document.getElementById("screen-4").classList.remove("hidden");
+            });
+
+            // Écran 4: Appel à l'Action et Qualification
+            document.getElementById("send-btn").addEventListener("click", function() {
+                const blocageInput = document.getElementById("blocage");
+                userBlockage = blocageInput.value.trim();
+                if (userBlockage === "") {
+                    alert("Merci de partager ce qui te bloque pour créer ton offre et un moyen de te contacter.");
+                    blocageInput.focus();
+                    return;
+                }
+                // Trouver le message personnalisé correspondant au blocage
+                let personalizedMessage = "";
+                for (const [key, message] of Object.entries(blockageMessages)) {
+                    if (userBlockage.toLowerCase().includes(key.toLowerCase())) {
+                        personalizedMessage = message;
+                        break;
+                    }
+                }
+                // Si aucun message spécifique n'est trouvé, utiliser un message générique
+                if (personalizedMessage === "") {
+                    personalizedMessage = "Merci d'avoir partagé ce qui te bloque. \"La Méthode Offre Parfaite\" est conçue pour t'aider à surmonter ces obstacles et à créer une offre qui correspond parfaitement à ton expertise et aux besoins de tes clients idéaux.";
+                }
+                // Afficher le message personnalisé
+                document.getElementById("personalized-message").textContent = personalizedMessage;
+                // Passer à l'écran suivant
+                document.getElementById("screen-4").classList.add("hidden");
+                document.getElementById("screen-5").classList.remove("hidden");
+                // Envoyer les données du formulaire
+                console.log("Données collectées :", {
+                    domaine: userDomain,
+                    blocage: userBlockage
+                });
+                // Envoi des données via Formspree (l'adresse email est masquée)
+                fetch("https://formspree.io/f/mjkrgdgd",  {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nom: document.getElementById('nom').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        telephone: document.getElementById('telephone').value.trim(),
+                        objectifs: document.getElementById('objectifs').value.trim(),
+                        methodologie: document.getElementById('methodologie').value.trim(),
+                        exemples_travail: document.getElementById('exemples-travail').value.trim(),
+                        hobbies: document.getElementById('hobbies').value.trim(),
+                        valeur_unique: document.getElementById('valeur-unique').value.trim(),
+                        propositions: document.getElementById('propositions').value.trim(),
+                        tarification: document.getElementById('tarification').value.trim(),
+                        marketing: document.getElementById('marketing').value.trim(),
+                        blocage: userBlockage,
+                        _subject: "Nouvelle réponse du générateur Mon Offre Idéale"
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        console.log("Erreur lors de l'envoi du formulaire");
+                    } else {
+                        console.log("Formulaire envoyé avec succès");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erreur:", error);
+                });
+            });
+
+            // Écran 5: Confirmation et Prochaines Étapes
+            document.getElementById("restart-btn").addEventListener("click", function() {
+                // Réinitialiser le formulaire
+                document.getElementById('nom').value = "";
+                document.getElementById('email').value = "";
+                document.getElementById('telephone').value = "";
+                document.getElementById('cv-file').value = "";
+                document.getElementById('objectifs').value = "";
+                document.getElementById('methodologie').value = "";
+                document.getElementById('exemples-travail').value = "";
+                document.getElementById('hobbies').value = "";
+                document.getElementById('valeur-unique').value = "";
+                document.getElementById('propositions').value = "";
+                document.getElementById('tarification').value = "";
+                document.getElementById('marketing').value = "";
+                document.getElementById('blocage').value = "";
+                // Revenir à l'écran d'accueil
+                document.getElementById("screen-5").classList.add("hidden");
+                document.getElementById("screen-1").classList.remove("hidden");
+            });
+        });
+    </script>
+</body>
+</html>
