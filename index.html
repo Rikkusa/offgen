@@ -19,34 +19,34 @@
         <!-- Écran 2: Upload de CV et Questions Supplémentaires -->
         <div id="screen-2" class="screen hidden">
             <h2>Informations Personnelles</h2>
-            <label for="nom">Nom:</label>
+            <label for="nom">Nom/Pseudo*:</label>
             <input type="text" id="nom" name="nom" required>
-            <label for="email">Adresse e-mail:</label>
+            <label for="email">Adresse e-mail*:</label>
             <input type="email" id="email" name="email" required>
-            <label for="telephone">Numéro de téléphone:</label>
-            <input type="tel" id="telephone" name="telephone" required>
+            <label for="telephone">Numéro de téléphone (facultatif) :</label>
+            <input type="tel" id="telephone" name="telephone">
             <div class="section">
                 <h2>Upload de CV</h2>
-                <label for="cv-file">Téléchargez votre CV:</label>
-                <input type="file" id="cv-file" name="cv-file" required>
+                <label for="cv-file">Télécharges ton CV (pas de format image) - facultatif :</label>
+                <input type="file" id="cv-file" name="cv-file">
             </div>
             <div class="section">
-                <h2>Questions Supplémentaires</h2>
-                <label for="objectifs">Quels sont tes objectifs professionnels à court et à long terme ?</label>
+                <h2>Questions Supplémentaires pour l'élaboration de ton offre : </h2>
+                <label for="objectifs">Quels sont tes objectifs pro à court et à long terme* ?</label>
                 <textarea id="objectifs" name="objectifs" required></textarea>
-                <label for="methodologie">Quelle est ta méthodologie pour résoudre les problèmes de tes clients ?</label>
-                <textarea id="methodologie" name="methodologie" required></textarea>
-                <label for="exemples-travail">Puis-je voir des exemples de travaux précédents ?</label>
+                <label for="methodologie">As-tu quelque chose qui te démarque dans ta manière de faire ton travail ?</label>
+                <textarea id="methodologie" name="methodologie" ></textarea>
+                <label for="exemples-travail">Puis-je avoir un aperçu de travaux précédents ?</label>
                 <textarea id="exemples-travail" name="exemples-travail"></textarea>
-                <label for="hobbies">Quels sont tes hobbies et activités complémentaires ?</label>
+                <label for="hobbies">Quels sont tes hobbies et activités complémentaires* ?</label>
                 <textarea id="hobbies" name="hobbies"></textarea>
-                <label for="valeur-unique">Quelle est ta valeur unique par rapport à d'autres professionnels de ton domaine ?</label>
+                <label for="valeur-unique">Comment tu te distingues par rapport aux autres de ton domaine* ?</label>
                 <textarea id="valeur-unique" name="valeur-unique" required></textarea>
-                <label for="propositions">Quels types de services ou de produits envisages-tu proposer ?</label>
+                <label for="propositions">As-tu une idée de ce que tu envisages de proposer* ?</label>
                 <textarea id="propositions" name="propositions" required></textarea>
-                <label for="tarification">Comment envisages-tu de tarifier tes services ?</label>
+                <label for="tarification">As-tu une idée du prix de vente* ?</label>
                 <textarea id="tarification" name="tarification" required></textarea>
-                <label for="marketing">Comment comptes-tu promouvoir tes offres ?</label>
+                <label for="marketing">sais-tu comment tu pourrais communiquer autour de cette offre ?</label>
                 <textarea id="marketing" name="marketing" required></textarea>
             </div>
             <button id="continue-btn" class="btn primary-btn">Continuer</button>
